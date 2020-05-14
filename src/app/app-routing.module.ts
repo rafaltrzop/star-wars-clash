@@ -1,12 +1,11 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
-import { ClashPageComponent } from '@app/clash/containers';
-
 const routes: Routes = [
   {
     path: '',
-    component: ClashPageComponent,
+    loadChildren: () =>
+      import('./clash/clash.module').then((m) => m.ClashModule),
   },
   {
     path: '**',
