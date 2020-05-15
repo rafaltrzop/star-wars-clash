@@ -1,3 +1,24 @@
-@import "~normalize.css";
+@import '~normalize.css';
 
-@import "material";
+@import 'variables';
+
+// TODO: set up Angular Material theme
+//@import "~@angular/material/prebuilt-themes/deeppurple-amber.css";
+//@import "~@angular/material/prebuilt-themes/indigo-pink.css";
+//@import "~@angular/material/prebuilt-themes/pink-bluegrey.css";
+//@import "~@angular/material/prebuilt-themes/purple-green.css";
+//@import "material";
+
+html,
+body {
+  height: 100%;
+}
+
+body {
+  color: $color-white;
+  background-color: $color-gray-900;
+  background-image: url('/assets/background.jpg');
+  background-repeat: no-repeat;
+  background-position: top right;
+  background-size: cover;
+}
