@@ -1,6 +1,5 @@
 <app-character-selection
-  [characters]="characters"
-  [(character)]="character"
+  [character]="character$ | async"
+  [characters]="characters$ | async"
+  (characterChange)="changeCharacter($event)"
 ></app-character-selection>
-
-<p>Selected character: {{ character | json }}</p>
