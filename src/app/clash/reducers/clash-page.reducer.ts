@@ -17,13 +17,13 @@ export const initialState: State = {
   characters: [
     {
       name: 'People',
+      resource: 'people',
       clashAttribute: 'mass',
-      apiResource: 'people',
     },
     {
       name: 'Starships',
+      resource: 'starships',
       clashAttribute: 'crew',
-      apiResource: 'starships',
     },
   ],
 };
