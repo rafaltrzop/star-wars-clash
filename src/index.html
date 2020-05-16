@@ -5,6 +5,7 @@
     <title>Star Wars Clash</title>
     <base href="/" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#b5bac5" />
     <link rel="icon" type="image/x-icon" href="favicon.ico" />
     <link
       href="https://fonts.googleapis.com/css?family=Roboto:300,400,500&display=swap"
@@ -14,8 +15,125 @@
       href="https://fonts.googleapis.com/icon?family=Material+Icons"
       rel="stylesheet"
     />
+    <style>
+      app-root:empty + .app-loading-screen {
+        z-index: 999;
+        opacity: 1;
+      }
+
+      .app-loading-screen {
+        position: fixed;
+        top: 0;
+        left: 0;
+        z-index: -1;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+        height: 100%;
+        background: #040505;
+        opacity: 0;
+        transition: opacity 0.6s ease-in-out, z-index 1ms 0.6s;
+      }
+
+      .app-spinner {
+        position: relative;
+        display: inline-block;
+        width: 80px;
+        height: 80px;
+      }
+
+      .app-spinner div {
+        position: absolute;
+        top: 33px;
+        width: 14px;
+        height: 14px;
+        background-color: #b5bac5;
+        border-radius: 50%;
+        animation-timing-function: cubic-bezier(0, 1, 1, 0);
+      }
+
+      .app-spinner div:nth-child(1) {
+        left: 8px;
+        animation: ellipsis1 0.6s infinite;
+      }
+
+      .app-spinner div:nth-child(2) {
+        left: 8px;
+        animation: ellipsis2 0.6s infinite;
+      }
+
+      .app-spinner div:nth-child(3) {
+        left: 32px;
+        animation: ellipsis2 0.6s infinite;
+      }
+
+      .app-spinner div:nth-child(4) {
+        left: 56px;
+        animation: ellipsis3 0.6s infinite;
+      }
+
+      @keyframes ellipsis1 {
+        0% {
+          transform: scale(0);
+        }
+        100% {
+          transform: scale(1);
+        }
+      }
+
+      @keyframes ellipsis2 {
+        0% {
+          transform: translateX(0);
+        }
+        100% {
+          transform: translateX(24px);
+        }
+      }
+
+      @keyframes ellipsis3 {
+        0% {
+          transform: scale(1);
+        }
+        100% {
+          transform: scale(0);
+        }
+      }
+    </style>
   </head>
   <body>
     <app-root></app-root>
+
+    <div class="app-loading-screen">
+      <div class="app-spinner">
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+      </div>
+
+      <noscript>
+        <style>
+          .app-spinner {
+            display: none;
+          }
+
+          .noscript {
+            font-family: Roboto, 'Helvetica Neue', sans-serif;
+            font-size: 20px;
+            font-weight: 400;
+            line-height: 1.4;
+            color: #b5bac5;
+            text-align: center;
+          }
+        </style>
+
+        <h1 class="noscript">
+          This app requires JavaScript.
+          <br />
+          Please enable it in your browser.
+        </h1>
+      </noscript>
+    </div>
   </body>
 </html>
