@@ -11,8 +11,9 @@ import * as fromClash from '@app/clash/reducers';
   styleUrls: ['./clash-page.component.scss'],
 })
 export class ClashPageComponent {
-  character$ = this.store.pipe(select(fromClash.getCharacter));
-  characters$ = this.store.pipe(select(fromClash.getCharacters));
+  loading$ = this.store.pipe(select(fromClash.getClashPageLoading));
+  character$ = this.store.pipe(select(fromClash.getClashPageCharacter));
+  characters$ = this.store.pipe(select(fromClash.getClashPageCharacters));
 
   constructor(private store: Store<fromClash.State>) {}
 

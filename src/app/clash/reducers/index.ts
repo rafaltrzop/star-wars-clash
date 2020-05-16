@@ -31,11 +31,15 @@ export const selectClashPageState = createSelector(
   selectClashState,
   (state: ClashState) => state[fromClashPage.clashPageFeatureKey]
 );
-export const getCharacter = createSelector(
+export const getClashPageLoading = createSelector(
+  selectClashPageState,
+  fromClashPage.getLoading
+);
+export const getClashPageCharacter = createSelector(
   selectClashPageState,
   fromClashPage.getCharacter
 );
-export const getCharacters = createSelector(
+export const getClashPageCharacters = createSelector(
   selectClashPageState,
   fromClashPage.getCharacters
 );

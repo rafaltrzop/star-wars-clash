@@ -3,3 +3,5 @@
   [characters]="characters$ | async"
   (characterChange)="changeCharacter($event)"
 ></app-character-selection>
+
+<mat-spinner *ngIf="loading$ | async"></mat-spinner>

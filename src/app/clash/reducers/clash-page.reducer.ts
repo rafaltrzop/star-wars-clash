@@ -6,32 +6,37 @@ import { Character } from '@app/clash/models';
 export const clashPageFeatureKey = 'clashPage';
 
 export interface State {
+  loading: boolean;
   character: Character;
   characters: Character[];
 }
 
-const people: Character = {
-  name: 'People',
-  clashAttribute: 'mass',
-  apiResource: 'people',
-};
-const starships: Character = {
-  name: 'Starships',
-  clashAttribute: 'crew',
-  apiResource: 'starships',
-};
 export const initialState: State = {
-  character: people,
-  characters: [people, starships],
+  loading: false,
+  character: null,
+  characters: [
+    {
+      name: 'People',
+      clashAttribute: 'mass',
+      apiResource: 'people',
+    },
+    {
+      name: 'Starships',
+      clashAttribute: 'crew',
+      apiResource: 'starships',
+    },
+  ],
 };
 
 export const reducer = createReducer(
   initialState,
   on(ClashPageActions.changeCharacter, (state, { character }) => ({
     ...state,
+    loading: true,
     character,
   }))
 );
 
+export const getLoading = (state: State) => state.loading;
 export const getCharacter = (state: State) => state.character;
 export const getCharacters = (state: State) => state.characters;
