@@ -5,4 +5,7 @@ import { Component } from '@angular/core';
   templateUrl: './clash-page.component.html',
   styleUrls: ['./clash-page.component.scss'],
 })
-export class ClashPageComponent {}
+export class ClashPageComponent {
+  characters: string[] = ['people', 'starships'];
+  character: string = this.characters[0];
+}

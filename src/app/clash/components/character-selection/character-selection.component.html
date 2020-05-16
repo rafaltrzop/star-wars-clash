@@ -1,1 +1,10 @@
-Choose your character
+<p>Choose your character:</p>
+<mat-radio-group
+  aria-label="Choose your character"
+  [ngModel]="character"
+  (ngModelChange)="characterChange.emit($event)"
+>
+  <mat-radio-button *ngFor="let character of characters" [value]="character">
+    {{ character | titlecase }}
+  </mat-radio-button>
+</mat-radio-group>
