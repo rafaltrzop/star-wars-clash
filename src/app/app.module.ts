@@ -4,7 +4,6 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { AppRoutingModule } from './app-routing.module';
 import { CoreModule } from '@app/core';
-import { ClashModule } from '@app/clash';
 
 import { AppComponent } from '@app/core/containers';
 
@@ -14,7 +13,6 @@ import { AppComponent } from '@app/core/containers';
     BrowserAnimationsModule,
     AppRoutingModule,
     CoreModule,
-    ClashModule,
   ],
   providers: [],
   bootstrap: [AppComponent],
