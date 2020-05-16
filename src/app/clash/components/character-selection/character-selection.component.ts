@@ -6,6 +6,8 @@ import {
   Output,
 } from '@angular/core';
 
+import { Character } from '@app/clash/models';
+
 @Component({
   selector: 'app-character-selection',
   templateUrl: './character-selection.component.html',
@@ -14,11 +16,11 @@ import {
 })
 export class CharacterSelectionComponent {
   @Input()
-  characters: string[];
+  characters: Character[];
 
   @Input()
-  character: string;
+  character: Character;
 
   @Output()
-  characterChange: EventEmitter<string> = new EventEmitter<string>();
+  characterChange: EventEmitter<Character> = new EventEmitter<Character>();
 }
