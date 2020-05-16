@@ -9,7 +9,7 @@ import { CoreModule } from '@app/core';
 
 import { AppComponent } from '@app/core/containers';
 
-import { environment } from '../environments/environment';
+import { environment } from '@env/environment';
 
 @NgModule({
   imports: [
