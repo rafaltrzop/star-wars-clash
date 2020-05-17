@@ -1,7 +1,7 @@
 import { createReducer, on } from '@ngrx/store';
 
 import { ClashPageActions } from '@app/clash/actions';
-import { Character } from '@app/clash/models';
+import { Character, People, Starship } from '@app/clash/models';
 
 export const clashPageFeatureKey = 'clashPage';
 
@@ -9,6 +9,8 @@ export interface State {
   loading: boolean;
   character: Character;
   characters: Character[];
+  people: People[];
+  starships: Starship[];
 }
 
 export const initialState: State = {
@@ -26,14 +28,41 @@ export const initialState: State = {
       clashAttribute: 'crew',
     },
   ],
+  people: [],
+  starships: [],
 };
 
 export const reducer = createReducer(
   initialState,
   on(ClashPageActions.changeCharacter, (state, { character }) => ({
     ...state,
-    loading: true,
     character,
+  })),
+  on(ClashPageActions.loadPeople, (state) => ({
+    ...state,
+    loading: true,
+  })),
+  on(ClashPageActions.loadPeopleSuccess, (state, { people }) => ({
+    ...state,
+    people,
+    loading: false,
+  })),
+  on(ClashPageActions.loadPeopleFailure, (state) => ({
+    ...state,
+    loading: false,
+  })),
+  on(ClashPageActions.loadStarships, (state) => ({
+    ...state,
+    loading: true,
+  })),
+  on(ClashPageActions.loadStarshipsSuccess, (state, { starships }) => ({
+    ...state,
+    starships,
+    loading: false,
+  })),
+  on(ClashPageActions.loadPeopleFailure, (state) => ({
+    ...state,
+    loading: false,
   }))
 );
 

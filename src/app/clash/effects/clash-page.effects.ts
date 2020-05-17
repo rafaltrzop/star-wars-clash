@@ -1,7 +1,9 @@
 import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
-import { map, tap } from 'rxjs/operators';
+import { catchError, map, switchMap } from 'rxjs/operators';
+import { of } from 'rxjs';
 
+import { SwapiService } from '@app/clash/services';
 import { ClashPageActions } from '@app/clash/actions';
 
 @Injectable()
@@ -15,35 +17,36 @@ export class ClashPageEffects {
           people: ClashPageActions.loadPeople,
           starships: ClashPageActions.loadStarships,
         };
-
         return resourceActionMap[resource]();
       })
     )
   );
 
-  loadPeople$ = createEffect(
-    () =>
-      this.actions$.pipe(
-        ofType(ClashPageActions.loadPeople),
-        tap(() => {
-          // TODO
-          console.log('LOAD PEOPLE');
-        })
-      ),
-    { dispatch: false }
+  loadPeople$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(ClashPageActions.loadPeople),
+      switchMap(() =>
+        this.swapiService.getPeople().pipe(
+          map((people) => ClashPageActions.loadPeopleSuccess({ people })),
+          catchError((error) => of(ClashPageActions.loadPeopleFailure()))
+        )
+      )
+    )
   );
 
-  loadStarships$ = createEffect(
-    () =>
-      this.actions$.pipe(
-        ofType(ClashPageActions.loadStarships),
-        tap(() => {
-          // TODO
-          console.log('LOAD STARSHIPS');
-        })
-      ),
-    { dispatch: false }
+  loadStarships$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(ClashPageActions.loadStarships),
+      switchMap(() =>
+        this.swapiService.getStarships().pipe(
+          map((starships) =>
+            ClashPageActions.loadStarshipsSuccess({ starships })
+          ),
+          catchError((error) => of(ClashPageActions.loadStarshipsFailure()))
+        )
+      )
+    )
   );
 
-  constructor(private actions$: Actions) {}
+  constructor(private actions$: Actions, private swapiService: SwapiService) {}
 }
