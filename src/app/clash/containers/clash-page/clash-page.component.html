@@ -1,7 +1,14 @@
+<!-- TODO: use the same async pipes once -->
+
 <app-character-selection
   [character]="character$ | async"
   [characters]="characters$ | async"
   (characterChange)="changeCharacter($event)"
 ></app-character-selection>
+
+<app-game-board
+  [resources]="resources$ | async"
+  [character]="character$ | async"
+></app-game-board>
 
 <mat-spinner *ngIf="loading$ | async"></mat-spinner>

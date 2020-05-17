@@ -1,7 +1,7 @@
 import { createReducer, on } from '@ngrx/store';
 
 import { ClashPageActions } from '@app/clash/actions';
-import { Character, People, Starship } from '@app/clash/models';
+import { Character } from '@app/clash/models';
 
 export const clashPageFeatureKey = 'clashPage';
 
@@ -9,8 +9,8 @@ export interface State {
   loading: boolean;
   character: Character;
   characters: Character[];
-  people: People[];
-  starships: Starship[];
+  // TODO: type unknown?
+  resources: any[];
 }
 
 export const initialState: State = {
@@ -20,16 +20,13 @@ export const initialState: State = {
     {
       name: 'People',
       resource: 'people',
-      clashAttribute: 'mass',
     },
     {
       name: 'Starships',
       resource: 'starships',
-      clashAttribute: 'crew',
     },
   ],
-  people: [],
-  starships: [],
+  resources: [],
 };
 
 export const reducer = createReducer(
@@ -44,7 +41,7 @@ export const reducer = createReducer(
   })),
   on(ClashPageActions.loadPeopleSuccess, (state, { people }) => ({
     ...state,
-    people,
+    resources: people,
     loading: false,
   })),
   on(ClashPageActions.loadPeopleFailure, (state) => ({
@@ -57,7 +54,7 @@ export const reducer = createReducer(
   })),
   on(ClashPageActions.loadStarshipsSuccess, (state, { starships }) => ({
     ...state,
-    starships,
+    resources: starships,
     loading: false,
   })),
   on(ClashPageActions.loadPeopleFailure, (state) => ({
@@ -69,3 +66,4 @@ export const reducer = createReducer(
 export const getLoading = (state: State) => state.loading;
 export const getCharacter = (state: State) => state.character;
 export const getCharacters = (state: State) => state.characters;
+export const getResources = (state: State) => state.resources;

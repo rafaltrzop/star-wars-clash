@@ -43,3 +43,7 @@ export const getClashPageCharacters = createSelector(
   selectClashPageState,
   fromClashPage.getCharacters
 );
+export const getClashPageResources = createSelector(
+  selectClashPageState,
+  fromClashPage.getResources
+);

@@ -1,0 +1,13 @@
+<h1>Gameboard</h1>
+<pre>Character: {{ character | json }}</pre>
+
+<!-- TODO: [disabled]="loading === true || character === null -->
+<button (click)="startClash()">
+  Start Clash
+</button>
+
+<h1>Card 1</h1>
+<pre>{{ cards[0] | json }}</pre>
+
+<h1>Card 2</h1>
+<pre>{{ cards[1] | json }}</pre>

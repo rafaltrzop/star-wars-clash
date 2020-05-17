@@ -7,7 +7,7 @@ import { EffectsModule } from '@ngrx/effects';
 import { MaterialModule } from '@app/material';
 import { ClashRoutingModule } from '@app/clash/clash-routing.module';
 
-import { ClashPageComponent } from '@app/clash/containers';
+import { ClashPageComponent, GameBoardComponent } from '@app/clash/containers';
 import { CharacterSelectionComponent } from '@app/clash/components';
 
 import { ClashPageEffects } from '@app/clash/effects';
@@ -22,6 +22,10 @@ import * as fromClash from '@app/clash/reducers';
     StoreModule.forFeature(fromClash.clashFeatureKey, fromClash.reducers),
     EffectsModule.forFeature([ClashPageEffects]),
   ],
-  declarations: [ClashPageComponent, CharacterSelectionComponent],
+  declarations: [
+    ClashPageComponent,
+    GameBoardComponent,
+    CharacterSelectionComponent,
+  ],
 })
 export class ClashModule {}
