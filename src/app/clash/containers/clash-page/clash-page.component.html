@@ -1,5 +1,13 @@
 <!-- TODO: use the same async pipes once -->
 
+<mat-spinner
+  *ngIf="loading$ | async"
+  class="spinner"
+  color="accent"
+  [diameter]="24"
+  [strokeWidth]="3"
+></mat-spinner>
+
 <app-logo></app-logo>
 
 <app-character-selection
@@ -12,5 +20,3 @@
   [resources]="resources$ | async"
   [character]="character$ | async"
 ></app-game-board>
-
-<mat-spinner *ngIf="loading$ | async" color="accent"></mat-spinner>
