@@ -20,12 +20,10 @@ export class GameBoardComponent {
   card1: Card<any>;
   card2: Card<any>;
 
-  constructor(private drawService: DrawService) {}
-
   clash(): void {
-    const [x, y] = this.drawService.getRandomPair<unknown>(this.resources);
-
     const resourceName = this.character.resourceName;
+    const [x, y] = DrawService.getRandomPair<unknown>(this.resources);
+
     this.card1 = resourceMap[resourceName].getCard(x);
     this.card2 = resourceMap[resourceName].getCard(y);
 

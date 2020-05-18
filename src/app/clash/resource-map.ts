@@ -2,58 +2,64 @@ import { ClashPageActions } from '@app/clash/actions';
 import { ActionCreator, TypedAction } from '@ngrx/store/src/models';
 
 import { People, Starship } from '@app/clash/models';
+import { DrawService } from '@app/clash/services';
 
 export abstract class Card<T> {
-  protected abstract clashAttribute: string;
-
   constructor(protected resource: T) {}
 
   get data(): T {
     return this.resource;
   }
 
-  // TODO: return -1, 0, 1?
-  abstract clash(card: Card<T>): boolean;
+  abstract clash(card: Card<T>): -1 | 0 | 1;
 
-  // TODO: use in clash() method
-  protected getClashAttributeValue(value: string): number {
-    value = '12.34-56,789';
+  protected getNumericValue(value: string): number {
+    const [rangeMin, rangeMax] = value.replace(',', '').split('-');
 
-    value.replace(',', '');
-    const [min, max] = value.split('-');
+    const min = Number(rangeMin);
+    const max = Number(rangeMax);
 
-    // TODO: could be NaN for "unknown"
-    const minInt = Number(min);
-    // TODO: could be undefined if no range ("30-100"), use minInt?
-    const maxInt = max ? Number(max) : minInt;
+    if (Number.isNaN(min)) {
+      return NaN;
+    } else if (Number.isNaN(max)) {
+      return min;
+    } else {
+      return DrawService.getRandomIntInclusive(min, max);
+    }
+  }
 
-    return 123456;
+  getWinner(value1: number, value2: number): -1 | 0 | 1 {
+    if (value1 > value2) {
+      return -1;
+    } else if (value2 > value1) {
+      return 1;
+    } else {
+      return 0;
+    }
   }
 }
 
 class PeopleCard extends Card<People> {
-  protected clashAttribute = 'mass';
-
-  constructor(protected card: People) {
-    super(card);
+  constructor(protected resource: People) {
+    super(resource);
   }
 
-  // TODO
-  clash(): boolean {
-    return true;
+  clash(card: Card<People>): -1 | 0 | 1 {
+    const value1 = this.getNumericValue(this.data.mass);
+    const value2 = this.getNumericValue(card.data.mass);
+    return this.getWinner(value1, value2);
   }
 }
 
 class StarshipCard extends Card<Starship> {
-  protected clashAttribute = 'mass';
-
-  constructor(protected card: Starship) {
-    super(card);
+  constructor(protected resource: Starship) {
+    super(resource);
   }
 
-  // TODO
-  clash(): boolean {
-    return false;
+  clash(card: Card<Starship>): -1 | 0 | 1 {
+    const value1 = this.getNumericValue(this.data.crew);
+    const value2 = this.getNumericValue(card.data.crew);
+    return this.getWinner(value1, value2);
   }
 }
 
