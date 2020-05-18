@@ -12,7 +12,15 @@ export class DrawService {
 
   // TODO: it will return undefined for empty arrays, return null instead?
   getRandomItem<T>(array: T[]): T {
-    const index = Math.floor(Math.random() * array.length);
+    const min = 0;
+    const max = array.length - 1;
+    const index = this.getRandomIntInclusive(min, max);
     return array[index];
+  }
+
+  getRandomIntInclusive(min: number, max: number): number {
+    min = Math.ceil(min);
+    max = Math.floor(max);
+    return Math.floor(Math.random() * (max - min + 1)) + min;
   }
 }
