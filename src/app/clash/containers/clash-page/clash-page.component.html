@@ -1,12 +1,11 @@
 <!-- TODO: use the same async pipes once -->
 
-<mat-spinner
+<mat-progress-bar
   *ngIf="loading$ | async"
-  class="spinner"
+  class="progress-bar"
+  mode="indeterminate"
   color="accent"
-  [diameter]="24"
-  [strokeWidth]="3"
-></mat-spinner>
+></mat-progress-bar>
 
 <app-logo></app-logo>
 
