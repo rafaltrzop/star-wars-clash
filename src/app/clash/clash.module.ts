@@ -8,7 +8,11 @@ import { MaterialModule } from '@app/material';
 import { ClashRoutingModule } from '@app/clash/clash-routing.module';
 
 import { ClashPageComponent, GameBoardComponent } from '@app/clash/containers';
-import { CharacterSelectionComponent } from '@app/clash/components';
+import {
+  CardComponent,
+  CharacterSelectionComponent,
+  LogoComponent,
+} from '@app/clash/components';
 
 import { ClashPageEffects } from '@app/clash/effects';
 import * as fromClash from '@app/clash/reducers';
@@ -25,7 +29,9 @@ import * as fromClash from '@app/clash/reducers';
   declarations: [
     ClashPageComponent,
     GameBoardComponent,
+    CardComponent,
     CharacterSelectionComponent,
+    LogoComponent,
   ],
 })
 export class ClashModule {}

@@ -9,8 +9,7 @@ export interface State {
   loading: boolean;
   character: Character;
   characters: Character[];
-  // TODO: type unknown?
-  resources: any[];
+  resources: unknown[];
 }
 
 export const initialState: State = {
@@ -19,11 +18,11 @@ export const initialState: State = {
   characters: [
     {
       name: 'People',
-      resource: 'people',
+      resourceName: 'people',
     },
     {
       name: 'Starships',
-      resource: 'starships',
+      resourceName: 'starships',
     },
   ],
   resources: [],

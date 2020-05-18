@@ -1,11 +1,21 @@
-<p>Choose your character:</p>
-<mat-radio-group
-  aria-label="Choose your character"
-  color="accent"
-  [ngModel]="character"
-  (ngModelChange)="characterChange.emit($event)"
->
-  <mat-radio-button *ngFor="let character of characters" [value]="character">
-    {{ character.name }}
-  </mat-radio-button>
-</mat-radio-group>
+<div class="row justify-content-center">
+  <div class="col-auto">
+    <label id="label" class="label">
+      Choose your character
+    </label>
+    <mat-radio-group
+      aria-labelledby="label"
+      color="accent"
+      [ngModel]="character"
+      (ngModelChange)="characterChange.emit($event)"
+    >
+      <mat-radio-button
+        *ngFor="let character of characters"
+        class="radio"
+        [value]="character"
+      >
+        {{ character.name }}
+      </mat-radio-button>
+    </mat-radio-group>
+  </div>
+</div>

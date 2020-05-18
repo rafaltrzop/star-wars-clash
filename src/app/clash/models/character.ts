@@ -1,4 +1,4 @@
 export interface Character {
   name: string;
-  resource: string;
+  resourceName: string;
 }

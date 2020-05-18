@@ -5,20 +5,15 @@ import { of } from 'rxjs';
 
 import { SwapiService } from '@app/clash/services';
 import { ClashPageActions } from '@app/clash/actions';
+import { resourceMap } from '@app/clash/resource-map';
 
 @Injectable()
 export class ClashPageEffects {
   changeCharacter$ = createEffect(() =>
     this.actions$.pipe(
       ofType(ClashPageActions.changeCharacter),
-      map((action) => action.character.resource),
-      map((resource) => {
-        const resourceActionMap = {
-          people: ClashPageActions.loadPeople,
-          starships: ClashPageActions.loadStarships,
-        };
-        return resourceActionMap[resource]();
-      })
+      map((action) => action.character.resourceName),
+      map((resourceName) => resourceMap[resourceName].loadResources())
     )
   );
 

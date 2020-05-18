@@ -15,8 +15,7 @@ export class ClashPageComponent {
   loading$: Observable<boolean>;
   character$: Observable<Character>;
   characters$: Observable<Character[]>;
-  // TODO: type unknown?
-  resources$: Observable<any[]>;
+  resources$: Observable<unknown[]>;
 
   constructor(private store: Store<fromClash.State>) {
     this.loading$ = this.store.pipe(select(fromClash.getClashPageLoading));

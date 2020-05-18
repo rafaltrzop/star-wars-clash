@@ -11,5 +11,9 @@ body {
   background-image: url('/assets/background.jpg');
   background-repeat: no-repeat;
   background-position: top right;
-  background-size: cover;
+  background-size: contain;
+
+  @media (min-width: $grid-breakpoint-xl) {
+    background-size: cover;
+  }
 }

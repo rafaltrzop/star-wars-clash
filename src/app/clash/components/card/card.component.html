@@ -1,0 +1,17 @@
+<mat-card class="card" [class.card_highlighted]="false">
+  <mat-card-header>
+    <mat-card-title>
+      {{ playerName }}
+    </mat-card-title>
+    <mat-card-subtitle>
+      Card name
+    </mat-card-subtitle>
+  </mat-card-header>
+
+  <mat-card-content>
+    <mat-card class="card-data">
+      <pre>{{ card && card.data | json }}</pre>
+    </mat-card>
+    <p>Score: 13</p>
+  </mat-card-content>
+</mat-card>
