@@ -1,17 +1,22 @@
-<mat-card class="card" [class.card_highlighted]="false">
+<mat-card class="card">
+  <!-- TODO: winner / loser / tie -->
+  <div *ngIf="winner" class="label">
+    Winner
+  </div>
+
   <mat-card-header>
     <mat-card-title>
       {{ playerName }}
     </mat-card-title>
     <mat-card-subtitle>
-      Card name
+      {{ card ? card.name : 'Character name' }}
     </mat-card-subtitle>
   </mat-card-header>
 
   <mat-card-content>
-    <mat-card class="card-data">
-      <pre>{{ card && card.data | json }}</pre>
+    <mat-card class="card__data">
+      <pre *ngIf="card">{{ card.data | json }}</pre>
     </mat-card>
-    <p>Score: 13</p>
+    <p>Score: {{ score }}</p>
   </mat-card-content>
 </mat-card>

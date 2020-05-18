@@ -11,7 +11,7 @@
   }
 
   &::-webkit-scrollbar-thumb {
-    background: $color-gray-300;
+    background: transparentize($color-white, 0.3);
     border: 3px solid $color-gray-900;
     border-radius: 6px;
   }

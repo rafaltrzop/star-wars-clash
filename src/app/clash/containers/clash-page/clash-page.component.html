@@ -16,6 +16,7 @@
 ></app-character-selection>
 
 <app-game-board
+  [loading]="loading$ | async"
   [resources]="resources$ | async"
   [character]="character$ | async"
 ></app-game-board>

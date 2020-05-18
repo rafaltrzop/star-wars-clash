@@ -4,7 +4,8 @@
       class="card"
       [card]="card1"
       [playerName]="'Player 1'"
-      [score]="123"
+      [score]="0"
+      [winner]="true"
     ></app-card>
   </div>
 
@@ -13,19 +14,19 @@
       class="card"
       [card]="card2"
       [playerName]="'Player 2'"
-      [score]="123"
+      [score]="0"
+      [winner]="false"
     ></app-card>
   </div>
 </div>
 
 <div class="row justify-content-center">
   <div class="col-auto">
-    <!-- TODO: [disabled]="loading === true || character === null -->
     <button
       class="button"
       (click)="clash()"
       color="accent"
-      [disabled]="false"
+      [disabled]="disabled"
       mat-flat-button
     >
       Clash Cards

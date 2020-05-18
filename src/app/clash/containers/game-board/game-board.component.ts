@@ -12,6 +12,9 @@ import { Card, resourceMap } from '@app/clash/resource-map';
 })
 export class GameBoardComponent {
   @Input()
+  loading: boolean;
+
+  @Input()
   resources: unknown[];
 
   @Input()
@@ -19,6 +22,10 @@ export class GameBoardComponent {
 
   card1: Card<any>;
   card2: Card<any>;
+
+  get disabled(): boolean {
+    return !this.character || this.loading;
+  }
 
   clash(): void {
     const resourceName = this.character.resourceName;

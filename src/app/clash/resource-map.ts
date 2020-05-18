@@ -11,6 +11,8 @@ export abstract class Card<T> {
     return this.resource;
   }
 
+  abstract get name(): string;
+
   abstract clash(card: Card<T>): -1 | 0 | 1;
 
   protected getNumericValue(value: string): number {
@@ -44,6 +46,10 @@ class PeopleCard extends Card<People> {
     super(resource);
   }
 
+  get name(): string {
+    return this.data.name;
+  }
+
   clash(card: Card<People>): -1 | 0 | 1 {
     const value1 = this.getNumericValue(this.data.mass);
     const value2 = this.getNumericValue(card.data.mass);
@@ -54,6 +60,10 @@ class PeopleCard extends Card<People> {
 class StarshipCard extends Card<Starship> {
   constructor(protected resource: Starship) {
     super(resource);
+  }
+
+  get name(): string {
+    return this.data.name;
   }
 
   clash(card: Card<Starship>): -1 | 0 | 1 {
