@@ -13,6 +13,8 @@
         *ngFor="let character of characters"
         class="radio"
         [value]="character"
+        [disabled]="loading && !radio.checked"
+        #radio
       >
         {{ character.name }}
       </mat-radio-button>
