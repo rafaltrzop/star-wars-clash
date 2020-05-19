@@ -2,10 +2,10 @@ import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 import { Store } from '@ngrx/store';
 
 import { DrawService } from '@app/clash/services';
-import { Character, Player } from '@app/clash/models';
+import { Card, Character, ClashWinner, Player } from '@app/clash/models';
 import { ClashPageActions } from '@app/clash/actions';
 import * as fromClash from '@app/clash/reducers';
-import { Card, ClashWinner, resourceMap } from '@app/clash/resource-map';
+import { resourceMap } from '@app/clash/utils';
 
 @Component({
   selector: 'app-game-board',

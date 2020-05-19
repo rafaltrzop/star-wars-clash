@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 
-import { Card } from '@app/clash/resource-map';
+import { Card } from '@app/clash/models';
 
 @Component({
   selector: 'app-card',

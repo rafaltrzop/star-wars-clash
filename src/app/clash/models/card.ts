@@ -1,8 +1,5 @@
-import { ClashPageActions } from '@app/clash/actions';
-import { ActionCreator, TypedAction } from '@ngrx/store/src/models';
-
-import { People, Starship } from '@app/clash/models';
 import { DrawService } from '@app/clash/services';
+import { People, Starship } from '@app/clash/models';
 
 export enum ClashWinner {
   Tie = 'TIE',
@@ -59,7 +56,7 @@ export abstract class Card<T> {
   }
 }
 
-class PeopleCard extends Card<People> {
+export class PeopleCard extends Card<People> {
   constructor(protected resource: People) {
     super(resource);
   }
@@ -73,7 +70,7 @@ class PeopleCard extends Card<People> {
   }
 }
 
-class StarshipCard extends Card<Starship> {
+export class StarshipCard extends Card<Starship> {
   constructor(protected resource: Starship) {
     super(resource);
   }
@@ -86,19 +83,3 @@ class StarshipCard extends Card<Starship> {
     return this.getNumericValue(this.data.crew);
   }
 }
-
-interface ResourceConfig<T> {
-  loadResources: ActionCreator<string, () => TypedAction<string>>;
-  getCard: (resource: T) => Card<T>;
-}
-
-export const resourceMap: { [key: string]: ResourceConfig<any> } = {
-  people: {
-    loadResources: ClashPageActions.loadPeople,
-    getCard: (resource) => new PeopleCard(resource),
-  },
-  starships: {
-    loadResources: ClashPageActions.loadStarships,
-    getCard: (resource) => new StarshipCard(resource),
-  },
-};

@@ -5,7 +5,7 @@ import { of } from 'rxjs';
 
 import { SwapiService } from '@app/clash/services';
 import { ClashPageActions } from '@app/clash/actions';
-import { resourceMap } from '@app/clash/resource-map';
+import { resourceMap } from '@app/clash/utils';
 
 @Injectable()
 export class ClashPageEffects {
