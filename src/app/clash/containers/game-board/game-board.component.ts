@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 import { Store } from '@ngrx/store';
 
 import { DrawService } from '@app/clash/services';
@@ -7,11 +7,11 @@ import { ClashPageActions } from '@app/clash/actions';
 import * as fromClash from '@app/clash/reducers';
 import { Card, ClashWinner, resourceMap } from '@app/clash/resource-map';
 
-// TODO: set change detection strategy
 @Component({
   selector: 'app-game-board',
   templateUrl: './game-board.component.html',
   styleUrls: ['./game-board.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class GameBoardComponent {
   @Input()
