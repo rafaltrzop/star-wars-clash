@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { select, Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 
-import { Character } from '@app/clash/models';
+import { Character, Player } from '@app/clash/models';
 import { ClashPageActions } from '@app/clash/actions';
 import * as fromClash from '@app/clash/reducers';
 
@@ -16,6 +16,7 @@ export class ClashPageComponent {
   character$: Observable<Character>;
   characters$: Observable<Character[]>;
   resources$: Observable<unknown[]>;
+  players$: Observable<[Player, Player]>;
 
   constructor(private store: Store<fromClash.State>) {
     this.loading$ = this.store.pipe(select(fromClash.getClashPageLoading));
@@ -24,6 +25,7 @@ export class ClashPageComponent {
       select(fromClash.getClashPageCharacters)
     );
     this.resources$ = this.store.pipe(select(fromClash.getClashPageResources));
+    this.players$ = this.store.pipe(select(fromClash.getClashPagePlayers));
   }
 
   changeCharacter(character: Character): void {

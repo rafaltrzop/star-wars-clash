@@ -1,23 +1,15 @@
 <div class="row justify-content-center">
-  <div class="col-md-5 col-lg-4 col-xl-3">
+  <div
+    *ngFor="let player of players; let i = index"
+    class="col-md-5 col-lg-4 col-xl-3"
+  >
     <app-card
       class="card"
-      [card]="card1"
-      [playerName]="'Player 1'"
-      [playerScore]="0"
-      [winner]="true"
-      [tie]="false"
-    ></app-card>
-  </div>
-
-  <div class="col-md-5 col-lg-4 col-xl-3">
-    <app-card
-      class="card"
-      [card]="card2"
-      [playerName]="'Player 2'"
-      [playerScore]="0"
-      [winner]="false"
-      [tie]="true"
+      [card]="cards && cards[i]"
+      [playerName]="player.name"
+      [playerScore]="player.score"
+      [winner]="player.winner"
+      [tie]="player.tie"
     ></app-card>
   </div>
 </div>

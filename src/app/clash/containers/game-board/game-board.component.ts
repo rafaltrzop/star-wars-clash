@@ -1,7 +1,10 @@
 import { Component, Input } from '@angular/core';
+import { Store } from '@ngrx/store';
 
 import { DrawService } from '@app/clash/services';
-import { Character } from '@app/clash/models';
+import { Character, Player } from '@app/clash/models';
+import { ClashPageActions } from '@app/clash/actions';
+import * as fromClash from '@app/clash/reducers';
 import { Card, ClashWinner, resourceMap } from '@app/clash/resource-map';
 
 // TODO: set change detection strategy
@@ -15,13 +18,17 @@ export class GameBoardComponent {
   loading: boolean;
 
   @Input()
+  character: Character;
+
+  @Input()
   resources: unknown[];
 
   @Input()
-  character: Character;
+  players: [Player, Player];
 
-  card1: Card<unknown>;
-  card2: Card<unknown>;
+  cards: [Card<unknown>, Card<unknown>];
+
+  constructor(private store: Store<fromClash.State>) {}
 
   get disabled(): boolean {
     return !this.character || this.loading;
@@ -29,35 +36,27 @@ export class GameBoardComponent {
 
   // TODO: extract some functions
   clash(): void {
+    const [resource1, resource2] = DrawService.getRandomPair<unknown>(
+      this.resources
+    );
+
     const resourceName = this.character.resourceName;
-    const [x, y] = DrawService.getRandomPair<unknown>(this.resources);
+    const card1 = resourceMap[resourceName].getCard(resource1);
+    const card2 = resourceMap[resourceName].getCard(resource2);
 
-    this.card1 = resourceMap[resourceName].getCard(x);
-    this.card2 = resourceMap[resourceName].getCard(y);
+    this.cards = [card1, card2];
 
-    const clashWinner = this.card1.clash(this.card2);
-    // TODO
-    // - dispatch set last winner
-
-    // TODO
+    const clashWinner = card1.clash(card2);
     switch (clashWinner) {
       case ClashWinner.Player1:
-        // TODO
-        // - dispatch increase points for player 1
-        // - set flag
+        this.store.dispatch(ClashPageActions.roundWonByPlayer1());
         break;
       case ClashWinner.Player2:
-        // TODO
-        // - dispatch increase points for player 2
-        // - set flag
+        this.store.dispatch(ClashPageActions.roundWonByPlayer2());
         break;
       case ClashWinner.Tie:
-        // TODO
-        // - set flag
+        this.store.dispatch(ClashPageActions.roundEndedWithTie());
         break;
     }
-
-    // TODO
-    console.log('winner: ', clashWinner);
   }
 }

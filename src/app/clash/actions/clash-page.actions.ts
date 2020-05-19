@@ -10,21 +10,33 @@ export const changeCharacter = createAction(
 export const loadPeople = createAction('[Clash Page] Load People');
 
 export const loadPeopleSuccess = createAction(
-  '[People Collection API] Load People Success',
+  '[People Collection API] Load People success',
   props<{ people: People[] }>()
 );
 
 export const loadPeopleFailure = createAction(
-  '[People Collection API] Load People Failure'
+  '[People Collection API] Load People failure'
 );
 
 export const loadStarships = createAction('[Clash Page] Load Starships');
 
 export const loadStarshipsSuccess = createAction(
-  '[Starships Collection API] Load Starships Success',
+  '[Starships Collection API] Load Starships success',
   props<{ starships: Starship[] }>()
 );
 
 export const loadStarshipsFailure = createAction(
-  '[Starships Collection API] Load Starships Failure'
+  '[Starships Collection API] Load Starships failure'
+);
+
+export const roundWonByPlayer1 = createAction(
+  '[Clash Page] Round won by Player 1'
+);
+
+export const roundWonByPlayer2 = createAction(
+  '[Clash Page] Round won by Player 2'
+);
+
+export const roundEndedWithTie = createAction(
+  '[Clash Page] Round ended with a tie'
 );
