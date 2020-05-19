@@ -13,12 +13,12 @@ export class SwapiService {
   constructor(private http: HttpClient) {}
 
   getPeople(): Observable<People[]> {
-    const url = `${environment.apiUrl}/people`;
+    const url = `${environment.apiUrl}/people/`;
     return this.getResource<People>(url);
   }
 
   getStarships(): Observable<Starship[]> {
-    const url = `${environment.apiUrl}/starships`;
+    const url = `${environment.apiUrl}/starships/`;
     return this.getResource<Starship>(url);
   }
 
@@ -27,8 +27,14 @@ export class SwapiService {
       switchMap((response) => {
         const url = response.next;
         results = [...results, ...response.results];
-        return url ? this.getResource<T>(url, results) : of(results);
+        return url
+          ? this.getResource<T>(this.useHttpsProtocol(url), results)
+          : of(results);
       })
     );
+  }
+
+  private useHttpsProtocol(url: string): string {
+    return url.replace('http://', 'https://');
   }
 }
