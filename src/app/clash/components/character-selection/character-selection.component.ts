@@ -16,9 +16,6 @@ import { Character } from '@app/clash/models';
 })
 export class CharacterSelectionComponent {
   @Input()
-  loading: boolean;
-
-  @Input()
   characters: Character[];
 
   @Input()
