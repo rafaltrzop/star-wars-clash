@@ -34,8 +34,14 @@ export class GameBoardComponent {
     return !this.character || this.loading;
   }
 
-  // TODO: extract some functions
-  clash(): void {
+  clashCards(): void {
+    const [card1, card2] = this.getRandomPairOfCards();
+    this.cards = [card1, card2];
+    const clashWinner = card1.clash(card2);
+    this.dispatchActions(clashWinner);
+  }
+
+  private getRandomPairOfCards(): [Card<unknown>, Card<unknown>] {
     const [resource1, resource2] = DrawService.getRandomPair<unknown>(
       this.resources
     );
@@ -44,9 +50,10 @@ export class GameBoardComponent {
     const card1 = resourceMap[resourceName].getCard(resource1);
     const card2 = resourceMap[resourceName].getCard(resource2);
 
-    this.cards = [card1, card2];
+    return [card1, card2];
+  }
 
-    const clashWinner = card1.clash(card2);
+  private dispatchActions(clashWinner: ClashWinner): void {
     switch (clashWinner) {
       case ClashWinner.Player1:
         this.store.dispatch(ClashPageActions.roundWonByPlayer1());
