@@ -17,6 +17,12 @@
     <mat-card class="card__data">
       <pre *ngIf="card">{{ card.data | json }}</pre>
     </mat-card>
-    <p>Score: {{ score }}</p>
+    <p class="card__stats">
+      <!-- TODO -->
+      <span>Power: <strong class="card__value">1137</strong></span>
+      <span>
+        Score: <strong class="card__value">{{ score }}</strong>
+      </span>
+    </p>
   </mat-card-content>
 </mat-card>

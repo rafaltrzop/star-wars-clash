@@ -19,6 +19,16 @@
     background-size: auto 55%;
     box-shadow: none;
   }
+
+  &__stats {
+    display: flex;
+    justify-content: space-between;
+    color: transparentize($color-white, 0.3);
+  }
+
+  &__value {
+    color: $color-white;
+  }
 }
 
 .label {
