@@ -4,16 +4,44 @@ import { ActionCreator, TypedAction } from '@ngrx/store/src/models';
 import { People, Starship } from '@app/clash/models';
 import { DrawService } from '@app/clash/services';
 
+export enum ClashWinner {
+  Tie = 'TIE',
+  Player1 = 'PLAYER1',
+  Player2 = 'PLAYER2',
+}
+
 export abstract class Card<T> {
-  constructor(protected resource: T) {}
+  protected cardPower: number;
+
+  constructor(protected resource: T) {
+    this.cardPower = this.calculatePower();
+  }
 
   get data(): T {
     return this.resource;
   }
 
+  get power(): number {
+    return this.cardPower;
+  }
+
   abstract get name(): string;
 
-  abstract clash(card: Card<T>): -1 | 0 | 1;
+  clash(card: Card<T>): ClashWinner {
+    return this.getClashWinner(this.power, card.power);
+  }
+
+  getClashWinner(value1: number, value2: number): ClashWinner {
+    if (value1 > value2) {
+      return ClashWinner.Player1;
+    } else if (value2 > value1) {
+      return ClashWinner.Player2;
+    } else {
+      return ClashWinner.Tie;
+    }
+  }
+
+  protected abstract calculatePower(): number;
 
   protected getNumericValue(value: string): number {
     const [rangeMin, rangeMax] = value.replace(',', '').split('-');
@@ -29,16 +57,6 @@ export abstract class Card<T> {
       return DrawService.getRandomIntInclusive(min, max);
     }
   }
-
-  getWinner(value1: number, value2: number): -1 | 0 | 1 {
-    if (value1 > value2) {
-      return -1;
-    } else if (value2 > value1) {
-      return 1;
-    } else {
-      return 0;
-    }
-  }
 }
 
 class PeopleCard extends Card<People> {
@@ -50,10 +68,8 @@ class PeopleCard extends Card<People> {
     return this.data.name;
   }
 
-  clash(card: Card<People>): -1 | 0 | 1 {
-    const value1 = this.getNumericValue(this.data.mass);
-    const value2 = this.getNumericValue(card.data.mass);
-    return this.getWinner(value1, value2);
+  protected calculatePower(): number {
+    return this.getNumericValue(this.data.mass);
   }
 }
 
@@ -66,10 +82,8 @@ class StarshipCard extends Card<Starship> {
     return this.data.name;
   }
 
-  clash(card: Card<Starship>): -1 | 0 | 1 {
-    const value1 = this.getNumericValue(this.data.crew);
-    const value2 = this.getNumericValue(card.data.crew);
-    return this.getWinner(value1, value2);
+  protected calculatePower(): number {
+    return this.getNumericValue(this.data.crew);
   }
 }
 

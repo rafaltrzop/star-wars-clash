@@ -2,6 +2,7 @@ import { createReducer, on } from '@ngrx/store';
 
 import { ClashPageActions } from '@app/clash/actions';
 import { Character } from '@app/clash/models';
+import { ClashWinner } from '@app/clash/resource-map';
 
 export const clashPageFeatureKey = 'clashPage';
 
@@ -10,6 +11,9 @@ export interface State {
   character: Character;
   characters: Character[];
   resources: unknown[];
+  lastWinner: ClashWinner;
+  scorePlayer1: number;
+  scorePlayer2: number;
 }
 
 export const initialState: State = {
@@ -26,6 +30,9 @@ export const initialState: State = {
     },
   ],
   resources: [],
+  lastWinner: null,
+  scorePlayer1: 0,
+  scorePlayer2: 0,
 };
 
 export const reducer = createReducer(

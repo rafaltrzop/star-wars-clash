@@ -16,7 +16,7 @@ export class CardComponent {
   playerName: string;
 
   @Input()
-  score: number;
+  playerScore: number;
 
   @Input()
   winner: boolean;
