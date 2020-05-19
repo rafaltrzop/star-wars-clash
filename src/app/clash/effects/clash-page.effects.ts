@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
-import { catchError, map, switchMap } from 'rxjs/operators';
+import { catchError, map, switchMap, takeUntil } from 'rxjs/operators';
 import { of } from 'rxjs';
 
 import { SwapiService } from '@app/clash/services';
@@ -22,6 +22,9 @@ export class ClashPageEffects {
       ofType(ClashPageActions.loadPeople),
       switchMap(() =>
         this.swapiService.getPeople().pipe(
+          takeUntil(
+            this.actions$.pipe(ofType(ClashPageActions.changeCharacter))
+          ),
           map((people) => ClashPageActions.loadPeopleSuccess({ people })),
           catchError((error) => of(ClashPageActions.loadPeopleFailure()))
         )
@@ -34,6 +37,9 @@ export class ClashPageEffects {
       ofType(ClashPageActions.loadStarships),
       switchMap(() =>
         this.swapiService.getStarships().pipe(
+          takeUntil(
+            this.actions$.pipe(ofType(ClashPageActions.changeCharacter))
+          ),
           map((starships) =>
             ClashPageActions.loadStarshipsSuccess({ starships })
           ),
