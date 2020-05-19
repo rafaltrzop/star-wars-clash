@@ -20,8 +20,8 @@ export class GameBoardComponent {
   @Input()
   character: Character;
 
-  card1: Card<any>;
-  card2: Card<any>;
+  card1: Card<unknown>;
+  card2: Card<unknown>;
 
   get disabled(): boolean {
     return !this.character || this.loading;

@@ -10,7 +10,7 @@ import { Card } from '@app/clash/resource-map';
 })
 export class CardComponent {
   @Input()
-  card: Card<any>;
+  card: Card<unknown>;
 
   @Input()
   playerName: string;
