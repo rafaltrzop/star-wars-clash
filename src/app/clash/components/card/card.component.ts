@@ -20,4 +20,7 @@ export class CardComponent {
 
   @Input()
   winner: boolean;
+
+  @Input()
+  tie: boolean;
 }

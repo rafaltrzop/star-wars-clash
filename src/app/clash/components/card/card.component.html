@@ -1,7 +1,9 @@
 <mat-card class="card">
-  <!-- TODO: winner / loser / tie -->
-  <div *ngIf="winner" class="label">
+  <div class="label label_success" *ngIf="winner">
     Winner
+  </div>
+  <div class="label label_warning" *ngIf="tie">
+    Tie
   </div>
 
   <mat-card-header>

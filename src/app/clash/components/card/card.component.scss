@@ -42,6 +42,13 @@
   color: transparentize($color-black, 0.13);
   text-align: center;
   text-transform: uppercase;
-  background: $color-green-300;
   transform: translate(50%, -50%) rotate(45deg);
+
+  &_success {
+    background-color: $color-aqua-300;
+  }
+
+  &_warning {
+    background-color: $color-green-300;
+  }
 }
