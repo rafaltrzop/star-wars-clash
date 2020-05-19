@@ -5,7 +5,6 @@ export class DrawService {
     return [x, y];
   }
 
-  // TODO: it will return undefined for empty arrays, return null instead?
   static getRandomItem<T>(array: T[]): T {
     const min = 0;
     const max = array.length - 1;
