@@ -28,7 +28,7 @@ export abstract class Card<T> {
     return this.getClashWinner(this.power, card.power);
   }
 
-  getClashWinner(value1: number, value2: number): ClashWinner {
+  private getClashWinner(value1: number, value2: number): ClashWinner {
     if (value1 > value2) {
       return ClashWinner.Player1;
     } else if (value2 > value1) {
