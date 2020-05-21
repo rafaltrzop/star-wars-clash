@@ -1,6 +1,6 @@
 import { ActionCreator, TypedAction } from '@ngrx/store/src/models';
 
-import { Card, PeopleCard, StarshipCard } from '@app/clash/models';
+import { Card, PersonCard, StarshipCard } from '@app/clash/models';
 import { ClashPageActions } from '@app/clash/actions';
 
 interface ResourceConfig<T> {
@@ -11,7 +11,7 @@ interface ResourceConfig<T> {
 export const resourceMap: { [key: string]: ResourceConfig<any> } = {
   people: {
     loadResources: ClashPageActions.loadPeople,
-    getCard: (resource) => new PeopleCard(resource),
+    getCard: (resource) => new PersonCard(resource),
   },
   starships: {
     loadResources: ClashPageActions.loadStarships,

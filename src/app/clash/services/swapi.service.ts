@@ -3,7 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { switchMap } from 'rxjs/operators';
 import { Observable, of } from 'rxjs';
 
-import { Collection, People, Starship } from '@app/clash/models';
+import { Collection, Person, Starship } from '@app/clash/models';
 import { environment } from '@env/environment';
 
 @Injectable({
@@ -12,9 +12,9 @@ import { environment } from '@env/environment';
 export class SwapiService {
   constructor(private http: HttpClient) {}
 
-  getPeople(): Observable<People[]> {
+  getPeople(): Observable<Person[]> {
     const url = `${environment.apiUrl}/people/`;
-    return this.getResource<People>(url);
+    return this.getResource<Person>(url);
   }
 
   getStarships(): Observable<Starship[]> {

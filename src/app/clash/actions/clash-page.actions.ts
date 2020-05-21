@@ -1,6 +1,6 @@
 import { createAction, props } from '@ngrx/store';
 
-import { Character, People, Starship } from '@app/clash/models';
+import { Character, Person, Starship } from '@app/clash/models';
 
 export const changeCharacter = createAction(
   '[Clash Page] Change Character',
@@ -11,7 +11,7 @@ export const loadPeople = createAction('[Clash Page] Load People');
 
 export const loadPeopleSuccess = createAction(
   '[People Collection API] Load People success',
-  props<{ people: People[] }>()
+  props<{ people: Person[] }>()
 );
 
 export const loadPeopleFailure = createAction(

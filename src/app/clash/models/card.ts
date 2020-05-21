@@ -1,5 +1,5 @@
 import { DrawService } from '@app/clash/services';
-import { People, Starship } from '@app/clash/models';
+import { Person, Starship } from '@app/clash/models';
 
 export enum ClashWinner {
   Tie = 'TIE',
@@ -56,8 +56,8 @@ export abstract class Card<T> {
   }
 }
 
-export class PeopleCard extends Card<People> {
-  constructor(protected resource: People) {
+export class PersonCard extends Card<Person> {
+  constructor(protected resource: Person) {
     super(resource);
   }
 

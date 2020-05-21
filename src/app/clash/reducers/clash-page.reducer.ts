@@ -18,11 +18,11 @@ export const initialState: State = {
   character: null,
   characters: [
     {
-      name: 'People',
+      name: 'Person',
       resourceName: 'people',
     },
     {
-      name: 'Starships',
+      name: 'Starship',
       resourceName: 'starships',
     },
   ],
