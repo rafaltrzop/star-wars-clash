@@ -1,27 +1,33 @@
-import { ClashWinner, Person, PersonCard } from '@app/clash/models';
+import {
+  ClashWinner,
+  Person,
+  PersonCard,
+  Starship,
+  StarshipCard,
+} from '@app/clash/models';
 
 describe('PersonCard', () => {
   const resource: Person = {
     name: '',
     height: '',
-    mass: 'string',
-    hair_color: 'string',
-    skin_color: 'string',
-    eye_color: 'string',
-    birth_year: 'string',
-    gender: 'string',
-    homeworld: 'string',
-    films: [''],
-    species: [''],
-    vehicles: [''],
-    starships: [''],
+    mass: '',
+    hair_color: '',
+    skin_color: '',
+    eye_color: '',
+    birth_year: '',
+    gender: '',
+    homeworld: '',
+    films: [],
+    species: [],
+    vehicles: [],
+    starships: [],
     created: '',
     edited: '',
     url: '',
   };
 
   describe('#data', () => {
-    it('should return resource', () => {
+    it('should return person resource', () => {
       const person: Person = { ...resource };
       const card = new PersonCard(person);
 
@@ -30,7 +36,7 @@ describe('PersonCard', () => {
   });
 
   describe('#power', () => {
-    describe('when person mass is string convertible to a number', () => {
+    describe('when person mass is a string convertible to a number', () => {
       it('should return number', () => {
         const person: Person = { ...resource, mass: '84' };
         const card = new PersonCard(person);
@@ -65,7 +71,7 @@ describe('PersonCard', () => {
 
   describe('#name', () => {
     it('should return card name', () => {
-      const person: Person = { ...resource, name: 'John' };
+      const person: Person = { ...resource, name: 'Jar Jar Binks' };
       const card = new PersonCard(person);
 
       expect(card.name).toBe(person.name);
@@ -116,6 +122,140 @@ describe('PersonCard', () => {
 
         const person2: Person = { ...resource, mass: '42' };
         const card2 = new PersonCard(person2);
+
+        expect(card1.clash(card2)).toBe(ClashWinner.Tie);
+      });
+    });
+  });
+});
+
+describe('StarshipCard', () => {
+  const resource: Starship = {
+    name: '',
+    model: '',
+    manufacturer: '',
+    cost_in_credits: '',
+    length: '',
+    max_atmosphering_speed: '',
+    crew: '',
+    passengers: '',
+    cargo_capacity: '',
+    consumables: '',
+    hyperdrive_rating: '',
+    MGLT: '',
+    starship_class: '',
+    pilots: [],
+    films: [],
+    created: '',
+    edited: '',
+    url: '',
+  };
+
+  describe('#data', () => {
+    it('should return starship resource', () => {
+      const starship: Starship = { ...resource };
+      const card = new StarshipCard(starship);
+
+      expect(card.data).toBe(starship);
+    });
+  });
+
+  describe('#power', () => {
+    describe('when starship crew is a string convertible to a number', () => {
+      it('should return number', () => {
+        const starship: Starship = { ...resource, crew: '5400' };
+        const card = new StarshipCard(starship);
+
+        expect(card.power).toBe(5400);
+      });
+
+      it('should return number', () => {
+        const starship: Starship = { ...resource, crew: '47,060' };
+        const card = new StarshipCard(starship);
+
+        expect(card.power).toBe(47060);
+      });
+
+      it('should return number from a given range', () => {
+        const starship: Starship = { ...resource, crew: '30-165' };
+        const card = new StarshipCard(starship);
+
+        expect(card.power).toBeGreaterThanOrEqual(30);
+        expect(card.power).toBeLessThanOrEqual(165);
+      });
+
+      it('should return number from a given range', () => {
+        const starship: Starship = { ...resource, crew: '1,200-1,600' };
+        const card = new StarshipCard(starship);
+
+        expect(card.power).toBeGreaterThanOrEqual(1200);
+        expect(card.power).toBeLessThanOrEqual(1600);
+      });
+    });
+
+    describe('when starship crew is a string not convertible to a number', () => {
+      it('should return NaN', () => {
+        const starship: Starship = { ...resource, crew: 'unknown' };
+        const card = new StarshipCard(starship);
+
+        expect(card.power).toBeNaN();
+      });
+    });
+  });
+
+  describe('#name', () => {
+    it('should return card name', () => {
+      const starship: Starship = { ...resource, name: 'X-wing' };
+      const card = new StarshipCard(starship);
+
+      expect(card.name).toBe(starship.name);
+    });
+  });
+
+  describe('#clash', () => {
+    describe('when starship1 crew is bigger than starship2 crew', () => {
+      it('should return clash winner as Player 1', () => {
+        const starship1: Starship = { ...resource, crew: '8' };
+        const card1 = new StarshipCard(starship1);
+
+        const starship2: Starship = { ...resource, crew: '3' };
+        const card2 = new StarshipCard(starship2);
+
+        expect(card1.clash(card2)).toBe(ClashWinner.Player1);
+      });
+    });
+
+    describe('when starship1 crew is smaller than starship2 crew', () => {
+      it('should return clash winner as Player 2', () => {
+        const starship1: Starship = { ...resource, crew: '854' };
+        const card1 = new StarshipCard(starship1);
+
+        const starship2: Starship = { ...resource, crew: '1,600' };
+        const card2 = new StarshipCard(starship2);
+
+        expect(card1.clash(card2)).toBe(ClashWinner.Player2);
+      });
+    });
+
+    describe('when starship1 crew is equal to starship2 crew', () => {
+      it('should return clash winner as a tie', () => {
+        const starship1: Starship = { ...resource, crew: '1' };
+        const card1 = new StarshipCard(starship1);
+
+        const starship2: Starship = { ...resource, crew: '1' };
+        const card2 = new StarshipCard(starship2);
+
+        expect(card1.clash(card2)).toBe(ClashWinner.Tie);
+      });
+    });
+
+    describe('when either of starships has unknown crew number', () => {
+      it('should return clash winner as a tie', () => {
+        const starship1: Starship = { ...resource, crew: 'unknown' };
+        const card1 = new StarshipCard(starship1);
+
+        const starship2: Starship = { ...resource, crew: '3' };
+        const card2 = new StarshipCard(starship2);
 
         expect(card1.clash(card2)).toBe(ClashWinner.Tie);
       });
