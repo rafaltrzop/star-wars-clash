@@ -62,7 +62,7 @@ describe('Game', () => {
       });
     });
 
-    describe('when either of cards has an unknown power', () => {
+    describe('when card1 power is unknown', () => {
       it('should return game winner as a Tie', () => {
         const card1Spy = jasmine.createSpyObj('Card', [], {
           power: NaN,
@@ -79,7 +79,9 @@ describe('Game', () => {
         expect(card1Spy.power).toBeNaN();
         expect(card2Spy.power).toBe(card2Power);
       });
+    });
 
+    describe('when card2 power is unknown', () => {
       it('should return game winner as a Tie', () => {
         const card1Power = 79;
         const card1Spy = jasmine.createSpyObj('Card', [], {
