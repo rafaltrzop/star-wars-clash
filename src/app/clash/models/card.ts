@@ -2,18 +2,10 @@ import { DrawService } from '@app/clash/services';
 import { Person, Starship } from '@app/clash/models';
 
 export abstract class Card<T> {
-  protected cardPower: number;
+  readonly power: number;
 
-  constructor(protected resource: T) {
-    this.cardPower = this.calculatePower();
-  }
-
-  get data(): T {
-    return this.resource;
-  }
-
-  get power(): number {
-    return this.cardPower;
+  constructor(public readonly data: T) {
+    this.power = this.calculatePower();
   }
 
   abstract get name(): string;
@@ -37,8 +29,8 @@ export abstract class Card<T> {
 }
 
 export class PersonCard extends Card<Person> {
-  constructor(protected resource: Person) {
-    super(resource);
+  constructor(public readonly data: Person) {
+    super(data);
   }
 
   get name(): string {
@@ -51,8 +43,8 @@ export class PersonCard extends Card<Person> {
 }
 
 export class StarshipCard extends Card<Starship> {
-  constructor(protected resource: Starship) {
-    super(resource);
+  constructor(public readonly data: Starship) {
+    super(data);
   }
 
   get name(): string {

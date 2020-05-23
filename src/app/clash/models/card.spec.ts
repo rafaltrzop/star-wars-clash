@@ -20,7 +20,7 @@ describe('PersonCard', () => {
     url: '',
   };
 
-  describe('#data', () => {
+  describe('data property', () => {
     it('should return person resource', () => {
       const person: Person = { ...resource };
       const card = new PersonCard(person);
@@ -29,7 +29,7 @@ describe('PersonCard', () => {
     });
   });
 
-  describe('#power', () => {
+  describe('power property', () => {
     describe('when person mass is a string convertible to a number', () => {
       it('should return number', () => {
         const person: Person = { ...resource, mass: '84' };
@@ -95,7 +95,7 @@ describe('StarshipCard', () => {
     url: '',
   };
 
-  describe('#data', () => {
+  describe('data property', () => {
     it('should return starship resource', () => {
       const starship: Starship = { ...resource };
       const card = new StarshipCard(starship);
@@ -104,7 +104,7 @@ describe('StarshipCard', () => {
     });
   });
 
-  describe('#power', () => {
+  describe('power property', () => {
     describe('when starship crew is a string convertible to a number', () => {
       it('should return number', () => {
         const starship: Starship = { ...resource, crew: '5400' };
