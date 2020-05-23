@@ -2,7 +2,7 @@ import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 import { Store } from '@ngrx/store';
 
 import { DrawService } from '@app/clash/services';
-import { Card, Character, ClashWinner, Player } from '@app/clash/models';
+import { Card, Character, GameWinner, Game, Player } from '@app/clash/models';
 import { ClashPageActions } from '@app/clash/actions';
 import * as fromClash from '@app/clash/reducers';
 import { resourceMap } from '@app/clash/utils';
@@ -37,8 +37,8 @@ export class GameBoardComponent {
   clashCards(): void {
     const [card1, card2] = this.getRandomPairOfCards();
     this.cards = [card1, card2];
-    const clashWinner = card1.clash(card2);
-    this.dispatchActions(clashWinner);
+    const gameWinner = Game.clashCards<unknown>(card1, card2);
+    this.dispatchActions(gameWinner);
   }
 
   private getRandomPairOfCards(): [Card<unknown>, Card<unknown>] {
@@ -53,15 +53,15 @@ export class GameBoardComponent {
     return [card1, card2];
   }
 
-  private dispatchActions(clashWinner: ClashWinner): void {
-    switch (clashWinner) {
-      case ClashWinner.Player1:
+  private dispatchActions(gameWinner: GameWinner): void {
+    switch (gameWinner) {
+      case GameWinner.Player1:
         this.store.dispatch(ClashPageActions.roundWonByPlayer1());
         break;
-      case ClashWinner.Player2:
+      case GameWinner.Player2:
         this.store.dispatch(ClashPageActions.roundWonByPlayer2());
         break;
-      case ClashWinner.Tie:
+      case GameWinner.Tie:
         this.store.dispatch(ClashPageActions.roundEndedWithTie());
         break;
     }

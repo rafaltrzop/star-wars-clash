@@ -1,10 +1,4 @@
-import {
-  ClashWinner,
-  Person,
-  PersonCard,
-  Starship,
-  StarshipCard,
-} from '@app/clash/models';
+import { Person, PersonCard, Starship, StarshipCard } from '@app/clash/models';
 
 describe('PersonCard', () => {
   const resource: Person = {
@@ -75,56 +69,6 @@ describe('PersonCard', () => {
       const card = new PersonCard(person);
 
       expect(card.name).toBe(person.name);
-    });
-  });
-
-  describe('#clash', () => {
-    describe('when person1 mass is bigger than person2 mass', () => {
-      it('should return clash winner as Player 1', () => {
-        const person1: Person = { ...resource, mass: '74' };
-        const card1 = new PersonCard(person1);
-
-        const person2: Person = { ...resource, mass: '60.8' };
-        const card2 = new PersonCard(person2);
-
-        expect(card1.clash(card2)).toBe(ClashWinner.Player1);
-      });
-    });
-
-    describe('when person1 mass is lower than person2 mass', () => {
-      it('should return clash winner as Player 2', () => {
-        const person1: Person = { ...resource, mass: '73' };
-        const card1 = new PersonCard(person1);
-
-        const person2: Person = { ...resource, mass: '74' };
-        const card2 = new PersonCard(person2);
-
-        expect(card1.clash(card2)).toBe(ClashWinner.Player2);
-      });
-    });
-
-    describe('when person1 mass is equal to person2 mass', () => {
-      it('should return clash winner as a tie', () => {
-        const person1: Person = { ...resource, mass: '127' };
-        const card1 = new PersonCard(person1);
-
-        const person2: Person = { ...resource, mass: '127' };
-        const card2 = new PersonCard(person2);
-
-        expect(card1.clash(card2)).toBe(ClashWinner.Tie);
-      });
-    });
-
-    describe('when either of persons has unknown mass', () => {
-      it('should return clash winner as a tie', () => {
-        const person1: Person = { ...resource, mass: 'unknown' };
-        const card1 = new PersonCard(person1);
-
-        const person2: Person = { ...resource, mass: '42' };
-        const card2 = new PersonCard(person2);
-
-        expect(card1.clash(card2)).toBe(ClashWinner.Tie);
-      });
     });
   });
 });
@@ -209,56 +153,6 @@ describe('StarshipCard', () => {
       const card = new StarshipCard(starship);
 
       expect(card.name).toBe(starship.name);
-    });
-  });
-
-  describe('#clash', () => {
-    describe('when starship1 crew is bigger than starship2 crew', () => {
-      it('should return clash winner as Player 1', () => {
-        const starship1: Starship = { ...resource, crew: '8' };
-        const card1 = new StarshipCard(starship1);
-
-        const starship2: Starship = { ...resource, crew: '3' };
-        const card2 = new StarshipCard(starship2);
-
-        expect(card1.clash(card2)).toBe(ClashWinner.Player1);
-      });
-    });
-
-    describe('when starship1 crew is smaller than starship2 crew', () => {
-      it('should return clash winner as Player 2', () => {
-        const starship1: Starship = { ...resource, crew: '854' };
-        const card1 = new StarshipCard(starship1);
-
-        const starship2: Starship = { ...resource, crew: '1,600' };
-        const card2 = new StarshipCard(starship2);
-
-        expect(card1.clash(card2)).toBe(ClashWinner.Player2);
-      });
-    });
-
-    describe('when starship1 crew is equal to starship2 crew', () => {
-      it('should return clash winner as a tie', () => {
-        const starship1: Starship = { ...resource, crew: '1' };
-        const card1 = new StarshipCard(starship1);
-
-        const starship2: Starship = { ...resource, crew: '1' };
-        const card2 = new StarshipCard(starship2);
-
-        expect(card1.clash(card2)).toBe(ClashWinner.Tie);
-      });
-    });
-
-    describe('when either of starships has unknown crew number', () => {
-      it('should return clash winner as a tie', () => {
-        const starship1: Starship = { ...resource, crew: 'unknown' };
-        const card1 = new StarshipCard(starship1);
-
-        const starship2: Starship = { ...resource, crew: '3' };
-        const card2 = new StarshipCard(starship2);
-
-        expect(card1.clash(card2)).toBe(ClashWinner.Tie);
-      });
     });
   });
 });
