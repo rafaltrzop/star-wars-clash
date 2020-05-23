@@ -13,7 +13,7 @@ export abstract class Card<T> {
   protected abstract calculatePower(): number;
 
   protected getNumericValue(value: string): number {
-    const [rangeMin, rangeMax] = value.replace(',', '').split('-');
+    const [rangeMin, rangeMax] = value.replace(/,(?=\d{3})/g, '').split('-');
 
     const min = Number(rangeMin);
     const max = Number(rangeMax);
