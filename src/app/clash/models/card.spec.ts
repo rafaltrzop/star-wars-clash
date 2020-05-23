@@ -30,26 +30,39 @@ describe('PersonCard', () => {
   });
 
   describe('power property', () => {
-    describe('when person mass is a string convertible to a number', () => {
-      it('should return number', () => {
+    describe('when person mass is an integer string', () => {
+      it('should return integer', () => {
         const person: Person = { ...resource, mass: '84' };
         const card = new PersonCard(person);
 
         expect(card.power).toBe(84);
       });
+    });
 
-      it('should return number', () => {
+    describe('when person mass is a decimal string', () => {
+      it('should return decimal', () => {
         const person: Person = { ...resource, mass: '78.2' };
         const card = new PersonCard(person);
 
         expect(card.power).toBe(78.2);
       });
+    });
 
-      it('should return number', () => {
-        const person: Person = { ...resource, mass: '1,358' };
+    describe('when person mass is an integer string number using commas to separate groups of thousands', () => {
+      it('should return integer', () => {
+        const person: Person = { ...resource, mass: '1,358,623' };
         const card = new PersonCard(person);
 
-        expect(card.power).toBe(1358);
+        expect(card.power).toBe(1358623);
+      });
+    });
+
+    describe('when person mass is a decimal string number using commas to separate groups of thousands', () => {
+      it('should return decimal', () => {
+        const person: Person = { ...resource, mass: '1,358,623.40' };
+        const card = new PersonCard(person);
+
+        expect(card.power).toBe(1358623.4);
       });
     });
 
