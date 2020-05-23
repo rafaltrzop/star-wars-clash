@@ -118,30 +118,36 @@ describe('StarshipCard', () => {
   });
 
   describe('power property', () => {
-    describe('when starship crew is a string convertible to a number', () => {
-      it('should return number', () => {
+    describe('when starship crew is an integer string', () => {
+      it('should return integer', () => {
         const starship: Starship = { ...resource, crew: '5400' };
         const card = new StarshipCard(starship);
 
         expect(card.power).toBe(5400);
       });
+    });
 
-      it('should return number', () => {
+    describe('when starship crew is an integer string using commas to separate groups of thousands', () => {
+      it('should return integer', () => {
         const starship: Starship = { ...resource, crew: '47,060' };
         const card = new StarshipCard(starship);
 
         expect(card.power).toBe(47060);
       });
+    });
 
-      it('should return number from a given range', () => {
+    describe('when starship crew is an integer range string', () => {
+      it('should return integer from a given range', () => {
         const starship: Starship = { ...resource, crew: '30-165' };
         const card = new StarshipCard(starship);
 
         expect(card.power).toBeGreaterThanOrEqual(30);
         expect(card.power).toBeLessThanOrEqual(165);
       });
+    });
 
-      it('should return number from a given range', () => {
+    describe('when starship crew is an integer range string using commas to separate groups of thousands', () => {
+      it('should return integer from a given range', () => {
         const starship: Starship = { ...resource, crew: '1,200-1,600' };
         const card = new StarshipCard(starship);
 
