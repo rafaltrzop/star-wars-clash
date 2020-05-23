@@ -2,11 +2,22 @@ import { DrawService } from '@app/clash/services';
 
 describe('DrawService', () => {
   describe('.getRandomPair', () => {
-    // todo
+    it('should return random pair of items from array', () => {
+      const array = ['foo', 'bar', 'baz'];
+      const [item1, item2] = DrawService.getRandomPair(array);
+
+      expect(array).toContain(item1);
+      expect(array).toContain(item2);
+    });
   });
 
   describe('.getRandomItem', () => {
-    // todo
+    it('should return random item from array', () => {
+      const array = ['foo', 'bar', 'baz'];
+      const randomItem = DrawService.getRandomItem(array);
+
+      expect(array).toContain(randomItem);
+    });
   });
 
   describe('.getRandomIntInclusive', () => {
