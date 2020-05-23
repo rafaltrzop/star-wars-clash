@@ -25,7 +25,7 @@ describe('PersonCard', () => {
       const person: Person = { ...resource };
       const card = new PersonCard(person);
 
-      expect(card.data).toBe(person);
+      expect(card.data).toEqual(person);
     });
   });
 
@@ -113,7 +113,7 @@ describe('StarshipCard', () => {
       const starship: Starship = { ...resource };
       const card = new StarshipCard(starship);
 
-      expect(card.data).toBe(starship);
+      expect(card.data).toEqual(starship);
     });
   });
 
