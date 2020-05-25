@@ -12,8 +12,7 @@ export class ClashPageEffects {
   changeCharacter$ = createEffect(() =>
     this.actions$.pipe(
       ofType(ClashPageActions.changeCharacter),
-      map((action) => action.character.resourceName),
-      map((resourceName) => resourceMap[resourceName].loadResources())
+      map((action) => resourceMap[action.character].loadResources())
     )
   );
 

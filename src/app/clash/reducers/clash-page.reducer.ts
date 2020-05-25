@@ -7,7 +7,7 @@ export const clashPageFeatureKey = 'clashPage';
 
 export interface State {
   loading: boolean;
-  character: Character;
+  character: string;
   characters: Character[];
   resources: unknown[];
   players: [Player, Player];

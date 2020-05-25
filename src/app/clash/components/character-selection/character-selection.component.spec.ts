@@ -66,7 +66,7 @@ describe('CharacterSelectionComponent', () => {
       component.characters = characters;
       fixture.detectChanges();
 
-      let selectedCharacter: Character;
+      let selectedCharacter: string;
       component.characterChange.subscribe((character) => {
         selectedCharacter = character;
       });
@@ -81,7 +81,8 @@ describe('CharacterSelectionComponent', () => {
       fixture.detectChanges();
       expect(radioButton.checked).toBeTrue();
 
-      expect(selectedCharacter).toEqual(characters[0]);
+      const character = characters[0].resourceName;
+      expect(selectedCharacter).toBe(character);
     });
   });
 });

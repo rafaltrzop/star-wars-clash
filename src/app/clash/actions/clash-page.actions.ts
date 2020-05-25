@@ -1,10 +1,10 @@
 import { createAction, props } from '@ngrx/store';
 
-import { Character, Person, Starship } from '@app/clash/models';
+import { Person, Starship } from '@app/clash/models';
 
 export const changeCharacter = createAction(
   '[Clash Page] Change Character',
-  props<{ character: Character }>()
+  props<{ character: string }>()
 );
 
 export const loadPeople = createAction('[Clash Page] Load People');

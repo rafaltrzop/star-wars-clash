@@ -12,7 +12,7 @@
       <mat-radio-button
         *ngFor="let character of characters"
         class="radio"
-        [value]="character"
+        [value]="character.resourceName"
       >
         {{ character.name }}
       </mat-radio-button>

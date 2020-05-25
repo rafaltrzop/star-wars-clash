@@ -19,8 +19,8 @@ export class CharacterSelectionComponent {
   characters: Character[];
 
   @Input()
-  character: Character;
+  character: string;
 
   @Output()
-  characterChange: EventEmitter<Character> = new EventEmitter<Character>();
+  characterChange: EventEmitter<string> = new EventEmitter<string>();
 }

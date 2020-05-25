@@ -13,7 +13,7 @@ import * as fromClash from '@app/clash/reducers';
 })
 export class ClashPageComponent {
   loading$: Observable<boolean>;
-  character$: Observable<Character>;
+  character$: Observable<string>;
   characters$: Observable<Character[]>;
   resources$: Observable<unknown[]>;
   players$: Observable<[Player, Player]>;
@@ -28,7 +28,7 @@ export class ClashPageComponent {
     this.players$ = this.store.pipe(select(fromClash.getClashPagePlayers));
   }
 
-  changeCharacter(character: Character): void {
+  changeCharacter(character: string): void {
     this.store.dispatch(ClashPageActions.changeCharacter({ character }));
   }
 }

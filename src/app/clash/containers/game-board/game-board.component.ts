@@ -18,7 +18,7 @@ export class GameBoardComponent {
   loading: boolean;
 
   @Input()
-  character: Character;
+  character: string;
 
   @Input()
   resources: unknown[];
@@ -46,9 +46,8 @@ export class GameBoardComponent {
       this.resources
     );
 
-    const resourceName = this.character.resourceName;
-    const card1 = resourceMap[resourceName].getCard(resource1);
-    const card2 = resourceMap[resourceName].getCard(resource2);
+    const card1 = resourceMap[this.character].getCard(resource1);
+    const card2 = resourceMap[this.character].getCard(resource2);
 
     return [card1, card2];
   }
