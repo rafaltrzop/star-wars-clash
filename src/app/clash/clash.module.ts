@@ -12,6 +12,7 @@ import {
   CardComponent,
   CharacterSelectionComponent,
   LogoComponent,
+  ProgressBarComponent,
 } from '@app/clash/components';
 
 import { ClashPageEffects } from '@app/clash/effects';
@@ -32,6 +33,7 @@ import * as fromClash from '@app/clash/reducers';
     CardComponent,
     CharacterSelectionComponent,
     LogoComponent,
+    ProgressBarComponent,
   ],
 })
 export class ClashModule {}

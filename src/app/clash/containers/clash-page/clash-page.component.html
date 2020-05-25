@@ -1,9 +1,4 @@
-<mat-progress-bar
-  *ngIf="loading$ | async"
-  class="progress-bar"
-  mode="indeterminate"
-  color="accent"
-></mat-progress-bar>
+<app-progress-bar [loading]="loading$ | async"></app-progress-bar>
 
 <app-logo></app-logo>
 
