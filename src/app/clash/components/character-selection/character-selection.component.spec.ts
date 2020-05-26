@@ -1,7 +1,7 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { FormsModule } from '@angular/forms';
-import { MaterialModule } from '@app/material';
 
+import { MaterialModule } from '@app/material';
 import { CharacterSelectionComponent } from '@app/clash/components';
 import { Character } from '@app/clash/models';
 
@@ -22,33 +22,36 @@ describe('CharacterSelectionComponent', () => {
   });
 
   it('should create', () => {
+    fixture.detectChanges();
     expect(component).toBeDefined();
   });
 
-  it('should display radio group with radio button for each character', () => {
-    const characters: Character[] = [
-      {
-        name: 'Person',
-        resourceName: 'people',
-      },
-      {
-        name: 'Starship',
-        resourceName: 'starships',
-      },
-    ];
-    component.characters = characters;
-    fixture.detectChanges();
+  describe('when characters are provided', () => {
+    it('should display radio group with radio button for each character', () => {
+      const characters: Character[] = [
+        {
+          name: 'Person',
+          resourceName: 'people',
+        },
+        {
+          name: 'Starship',
+          resourceName: 'starships',
+        },
+      ];
+      component.characters = characters;
+      fixture.detectChanges();
 
-    const characterSelectionElement: HTMLElement = fixture.nativeElement;
-    const radioGroup = characterSelectionElement.querySelector(
-      'mat-radio-group'
-    );
-    const radioButtons = characterSelectionElement.querySelectorAll(
-      'mat-radio-button'
-    );
+      const characterSelectionElement: HTMLElement = fixture.nativeElement;
+      const radioGroup = characterSelectionElement.querySelector(
+        'mat-radio-group'
+      );
+      const radioButtons = characterSelectionElement.querySelectorAll(
+        'mat-radio-button'
+      );
 
-    expect(radioGroup).not.toBeNull();
-    expect(radioButtons.length).toBe(characters.length);
+      expect(radioGroup).not.toBeNull();
+      expect(radioButtons.length).toBe(characters.length);
+    });
   });
 
   describe('when character radio button is clicked', () => {
