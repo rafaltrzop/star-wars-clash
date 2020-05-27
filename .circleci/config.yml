@@ -46,7 +46,7 @@ jobs:
 
   test:
     docker:
-      - image: circleci/node:12
+      - image: circleci/node:12-browsers
 
     steps:
       # check out source code to working directory
