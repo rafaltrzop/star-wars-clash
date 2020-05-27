@@ -1,0 +1,80 @@
+# JavaScript Node.js CircleCI 2.0 configuration file
+# https://circleci.com/docs/2.0/language-javascript/
+
+version: 2
+
+jobs:
+  build:
+    docker:
+      - image: circleci/node:12
+
+    steps:
+      # check out source code to working directory
+      - checkout
+
+      # restore, install and cache dependencies
+      - restore_cache:
+          keys:
+            - v1-dependencies-{{ checksum "package.json" }}
+            # fallback to using the latest cache if no exact match is found
+            - v1-dependencies-
+      - run:
+          name: Install dependencies
+          command: npm install
+      - save_cache:
+          paths:
+            - node_modules
+          key: v1-dependencies-{{ checksum "package.json" }}
+
+  lint:
+    docker:
+      - image: circleci/node:12
+
+    steps:
+      # check out source code to working directory
+      - checkout
+
+      # restore cached dependencies
+      - restore_cache:
+          keys:
+            - v1-dependencies-{{ checksum "package.json" }}
+
+      # run code linters
+      - run:
+          name: Run code linters
+          command: npm run lint
+
+  test:
+    docker:
+      - image: circleci/node:12
+
+    steps:
+      # check out source code to working directory
+      - checkout
+
+      # restore cached dependencies
+      - restore_cache:
+          keys:
+            - v1-dependencies-{{ checksum "package.json" }}
+
+      # run unit tests
+      - run:
+          name: Run unit tests
+          command: npm run test -- --no-watch --no-progress --browsers=ChromeHeadlessCI
+
+      # run e2e tests
+      - run:
+          name: Run E2E tests
+          command: npm run e2e -- --protractor-config=e2e/protractor-ci.conf.js
+
+workflows:
+  version: 2
+  build_lint_and_test:
+    jobs:
+      - build
+      - lint:
+          requires:
+            - build
+      - test:
+          requires:
+            - build
