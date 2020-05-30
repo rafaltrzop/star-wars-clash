@@ -26,7 +26,7 @@ export class GameBoardComponent {
   @Input()
   players: [Player, Player];
 
-  cards: [Card<unknown>, Card<unknown>];
+  cards: [Card<unknown>, Card<unknown>] = [null, null];
 
   constructor(private store: Store<fromClash.State>) {}
 
