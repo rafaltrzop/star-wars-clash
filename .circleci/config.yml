@@ -39,10 +39,15 @@ jobs:
           keys:
             - v1-dependencies-{{ checksum "package.json" }}
 
-      # run code linters
+      # lint Sass files
       - run:
-          name: Run code linters
-          command: npm run lint
+          name: Lint Sass files
+          command: npm run lint:scss
+
+      # lint TypeScript files
+      - run:
+          name: Lint TypeScript files
+          command: npm run lint:ts
 
   test:
     docker:
