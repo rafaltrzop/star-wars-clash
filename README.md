@@ -1,27 +1,78 @@
 # Star Wars Clash
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 9.1.5.
+Star Wars card game built using [SWAPI](https://swapi.dev/). The application allows a user to select a random card from one of the card decks and clash them by comparing the common attribute. The stronger card wins. The game tracks score for each player.
 
-## Development server
+## Demo
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+[You can see it in action right here.](https://star-wars-clash.netlify.app/)
 
-## Code scaffolding
+## Requirements
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+- [Node.js](https://nodejs.org/) - JavaScript runtime
+- [npm](https://www.npmjs.com/) - Node.js dependency manager
+
+## Setup
+
+### Dependencies
+
+Install dependencies:
+
+```
+$ npm install
+```
+
+### IDE
+
+IntelliJ IDEA / WebStorm / PhpStorm:
+
+1. Install the following plugins:
+
+   - [Prettier](https://plugins.jetbrains.com/plugin/10456-prettier)
+   - [EditorConfig](https://plugins.jetbrains.com/plugin/7294-editorconfig)
+   - [.ignore](https://plugins.jetbrains.com/plugin/7495--ignore)
+
+2. Go to `File > Settings > Languages & Frameworks > JavaScript > Prettier`
+
+   Check `Run on save for files` and use below as a value:
+
+   ```
+   {**/*,*}.{js,ts,html,scss,json,md}
+   ```
+
+From now on every change in code base will be automatically formatted by [Prettier](https://prettier.io/).
+
+## Development
+
+1. Run server:
+
+   ```
+   $ npm start
+   ```
+
+2. Navigate to [http://localhost:4200/](http://localhost:4200/).
+
+3. Change some code.
+
+## Tests
+
+Run unit tests:
+
+```
+$ npm run test
+```
+
+Run E2E tests:
+
+```
+$ npm run e2e
+```
 
 ## Build
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
+Run build command:
 
-## Running unit tests
+```
+$ npm run build
+```
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+The build artifacts will be stored in the `dist/` directory.
